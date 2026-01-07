@@ -1,35 +1,55 @@
-## Building & Elevator System Simulation
+# Elevator System Simulation
 
-OVERVIEW:
-This project simulates an elevator system using a Model-View-Controller (MVC) architecture to demonstrate the software to potential clients. The application models multiple elevators operating within a building, handling requests and displaying the current status of each elevator, including position, direction, operational status, and scheduled stops.
+Multi-elevator simulation with Java Swing GUI. Models elevator scheduling, request handling, and real-time status display using MVC architecture.
 
-## FEATURES:
-- Interactive GUI using Java Swing that displays the status of each elevator in the building.
-- Real-time updates reflecting the model's state in response to user actions or system events.
-- Controls to start a new simulation, and manage elevator operations including start, stop, and out of service.
-- Step button to advance the simulation manually and see the immediate effects on the elevator system.
+## Features
 
-## HOW TO RUN:
-- To run the application, execute the provided BuildingSystem.jar file in the res folder. Ensure Java is installed on your machine.
-- Please ensure Java is correctly installed on your system to run the application without issues. Test the JAR file outside the development environment to confirm its portability.
-## HOW TO USE THE PROGRAM:
-- Upon launching the application, you will see the main window displaying the elevator statuses.
-- Use the "Start" button to initiate the simulation with default or specified parameters.
-- "Step" button can be used to manually step through the simulation, updating the view with each press.
-- Elevators can be put out of service or returned to service as needed during the simulation.
+- Real-time visualization of elevator position, direction, and scheduled stops
+- Manual step-through mode for debugging scheduling logic
+- Elevator service controls (start, stop, out-of-service)
+- Configurable building parameters (floors, elevator count)
 
-## DESIGN/MODEL CHANGES:
-- Transitioned to an MVC architecture to decouple logic and presentation, enhancing maintainability and scalability.
-- Enhanced error handling and user input validation to prevent and manage operational exceptions.
+## Running
 
-## ASSUMPTIONS:
-- All inputs are valid integers representing floors within the building's range.
-- Elevators start from the ground floor.
-- Simulation does not account for real-time delays, simulating movement instantaneously.
+```bash
+java -jar res/BuildingSystem.jar
+```
 
-## LIMITATIONS:
-- The GUI is simplistic and primarily functional; aesthetic improvements could enhance user experience.
-- Current implementation does not support dynamic reconfiguration of the number of floors or elevators during runtime.
+Requires Java 8+.
 
+## Usage
 
+1. **Start** — Initialize simulation with default or custom parameters
+2. **Step** — Advance simulation one tick (manual mode)
+3. **Service toggle** — Put elevators in/out of service during simulation
 
+## Architecture
+
+```
+┌─────────────┐    updates    ┌─────────────┐
+│    Model    │ ───────────→  │    View     │
+│  (Building, │               │  (Swing UI) │
+│  Elevators) │ ←───────────  │             │
+└─────────────┘   user input  └─────────────┘
+       ↑                            │
+       │         commands           │
+       └────────────────────────────┘
+                Controller
+```
+
+| Component | Responsibility |
+|-----------|----------------|
+| Model | Building state, elevator scheduling, request queue |
+| View | Swing GUI, status display, user controls |
+| Controller | Input handling, simulation tick coordination |
+
+## Constraints
+
+- Elevators start from ground floor
+- Floor inputs must be valid integers within building range
+- Movement is instantaneous per tick (no real-time delays)
+- Floor/elevator count fixed at simulation start
+
+## License
+
+MIT
